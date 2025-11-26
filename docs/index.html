@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TFCGT Bridge Project Overview</title>
+  <meta name="description" content="TFCGT Bridge — roadmap, timeline and project status for unifying TerraFirmaCraft & GregTech CEu." />
+
+  <!-- Link to external stylesheet -->
+  <link rel="stylesheet" href="assets/style.css">
+
+  <!-- Favicons (optional) -->
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+</head>
+<body>
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <img class="logo" src="assets/logo.png" alt="TFCGT Bridge logo">
+      <div class="title">
+        <h1>TFCGT Bridge Project Overview</h1>
+        <p class="subtitle">Roadmap & development hub for integrating TerraFirmaCraft & GregTech CEu</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar" aria-label="Project navigation">
+      <nav>
+        <ul>
+          <li><a href="#overview" class="nav-link">Overview</a></li>
+          <li><a href="#phases" class="nav-link">Project Phases</a></li>
+          <li><a href="#roadmap" class="nav-link">Roadmap Timeline</a></li>
+          <li><a href="#progress" class="nav-link">Progress Table</a></li>
+          <li><a href="#details" class="nav-link">Phase Details</a></li>
+          <li><a href="#contact" class="nav-link">Contact / Repo</a></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="sidebar-toggle" aria-expanded="true" title="Toggle sidebar">Hide</button>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="content" id="main">
+      <section id="overview" class="panel">
+        <h2>Overview</h2>
+        <p class="muted">TFCGT Bridge aims to make TerraFirmaCraft and GregTech CEu behave as a single, cohesive progression: unified materials & recipes, GT-style veins inside TFC geology, KubeJS / JEI support, and optional UI themes.</p>
+
+        <details class="quick-why">
+          <summary>Why this bridge?</summary>
+          <div class="detail-body">
+            <p>TerraFirmaCraft offers deep geological realism and metallurgy. GregTech brings advanced machines and progression depth. The bridge removes duplication, aligns progression, and gives modpack makers flexible configuration and scripting hooks.</p>
+          </div>
+        </details>
+      </section>
+
+      <section id="phases" class="panel">
+        <h2>Project Phases (Planned)</h2>
+        <p class="muted">All phases are currently planned. Nothing has been marked complete unless explicitly stated in the repository issues.</p>
+
+        <div class="phases-grid">
+          <article class="phase-card">
+            <h3>Phase 1 — Foundation</h3>
+            <p class="muted">Unified material registry, ID normalization, base API & datapack format design.</p>
+          </article>
+
+          <article class="phase-card">
+            <h3>Phase 2 — Worldgen</h3>
+            <p class="muted">GT-style vein placement adapted to TFC rock strata; data-driven vein definitions & config.</p>
+          </article>
+
+          <article class="phase-card">
+            <h3>Phase 3 — Metallurgy</h3>
+            <p class="muted">Align melting points, alloys, bloomery ↔ machines, and canonical metal outputs.</p>
+          </article>
+
+          <article class="phase-card">
+            <h3>Phase 4 — Recipes & Progression</h3>
+            <p class="muted">Recipe rewrites, progression gating, and JEI clarity for unlocks.</p>
+          </article>
+
+          <article class="phase-card">
+            <h3>Phase 5 — Integrations</h3>
+            <p class="muted">Native KubeJS & JEI hooks so pack makers don't need extra bridge mods.</p>
+          </article>
+
+          <article class="phase-card">
+            <h3>Phase 6 — UI & Themes</h3>
+            <p class="muted">Optional menu and JEI theming to reflect the mod's brand aesthetic.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="roadmap" class="panel">
+        <h2>Roadmap Diagram</h2>
+
+        <!-- Card-style container with embedded roadmap diagram (external file recommended) -->
+        <div class="image-card">
+          <!-- If you later host the image online or in repo use a normal <img src="...">.
+               For now, this expects you to place the file at /assets/roadmap.png in your repo. -->
+          <img src="assets/roadmap.png" alt="TFCGT Bridge Roadmap Diagram" class="roadmap-img" />
+          <figcaption class="muted">High-level roadmap with goals for each phase.</figcaption>
+        </div>
+
+        <!-- Animated timeline (step-by-step) -->
+        <div class="timeline" id="timeline">
+          <div class="timeline-step">
+            <div class="marker"></div>
+            <div class="step-content">
+              <h4>1. Foundation</h4>
+              <p class="muted">Design material registry, JSON formats, and API hooks for KubeJS.</p>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="marker"></div>
+            <div class="step-content">
+              <h4>2. Worldgen</h4>
+              <p class="muted">Hybrid GT vein generator respecting TFC strata and rock compatibility lists.</p>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="marker"></div>
+            <div class="step-content">
+              <h4>3. Metallurgy</h4>
+              <p class="muted">Canonical alloys and heat system alignment to prevent conflicts.</p>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="marker"></div>
+            <div class="step-content">
+              <h4>4. Recipes & Progression</h4>
+              <p class="muted">Datapack-driven recipe rewrites and progression gating mappings.</p>
+            </div>
+          </div>
+
+          <div class="timeline-step">
+            <div class="marker"></div>
+            <div class="step-content">
+              <h4>5. Integrations</h4>
+              <p class="muted">JEI panels & KubeJS events for material & worldgen customization.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="progress" class="panel">
+        <h2>Progress Table</h2>
+        <p class="muted">Accurate project state — currently planned (not started) unless an issue or PR indicates otherwise.</p>
+
+        <div class="progress-table-wrap">
+          <table class="progress-table" aria-label="Project progress">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Status</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Material Registry & APIs</td>
+                <td class="status planned">Planned</td>
+                <td>Design docs and schema planned.</td>
+              </tr>
+              <tr>
+                <td>Worldgen (GT veins in TFC)</td>
+                <td class="status planned">Planned</td>
+                <td>Hybrid algorithm to be prototyped.</td>
+              </tr>
+              <tr>
+                <td>Alloy & Metallurgy Mapping</td>
+                <td class="status planned">Planned</td>
+                <td>Spec and acceptance tests planned.</td>
+              </tr>
+              <tr>
+                <td>Recipe Rewrites (Datapack)</td>
+                <td class="status planned">Planned</td>
+                <td>Will produce datapack outputs for pack makers.</td>
+              </tr>
+              <tr>
+                <td>KubeJS / JEI Integration</td>
+                <td class="status planned">Planned</td>
+                <td>Native events & JEI overlays.</td>
+              </tr>
+              <tr>
+                <td>UI & Theme System</td>
+                <td class="status planned">Planned</td>
+                <td>Optional client-side themes & assets.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="details" class="panel">
+        <h2>Phase Details (Technical)</h2>
+
+        <details>
+          <summary>Phase 1 — Foundation</summary>
+          <div class="detail-body">
+            <h4>Goals</h4>
+            <ul class="muted">
+              <li>Provide canonical material keys (e.g., copper, tin, bismuth).</li>
+              <li>Expose Java API for other mods to query canonical items.</li>
+              <li>Design a datapack tag generator for `forge:ingots/*` and similar.</li>
+            </ul>
+
+            <h4>Acceptance Criteria</h4>
+            <ul class="muted">
+              <li>APIs loaded after all mods; no race conditions.</li>
+              <li>Datapack tags write deterministically.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>Phase 2 — Worldgen</summary>
+          <div class="detail-body">
+            <h4>Goals</h4>
+            <ul class="muted">
+              <li>GT-style veins place only into compatible TFC rocks.</li>
+              <li>Deterministic placement using world seed + chunk pos + vein id.</li>
+            </ul>
+
+            <h4>Implementation Notes</h4>
+            <ul class="muted">
+              <li>Use data-driven `PlacedFeature` where possible.</li>
+              <li>Cache TFC rock column lookups per chunk for performance.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary>Phase 3 — Metallurgy</summary>
+          <div class="detail-body">
+            <p class="muted">Map TFC metallurgy ages to GT tiers (configurable), and provide recipe gating based on progression flags.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Phase 4 — Recipes & Tiering</summary>
+          <div class="detail-body">
+            <p class="muted">Generate datapack overrides to canonicalize recipes; provide debug tools for pack makers.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Phase 5 — Integrations</summary>
+          <div class="detail-body">
+            <p class="muted">Expose KubeJS events like <code>tfcgt.worldgen.modifyVein()</code> and material registration hooks.</p>
+          </div>
+        </details>
+      </section>
+
+      <section id="contact" class="panel">
+        <h2>Contact & Repo</h2>
+        <p class="muted">Repo: <a href="#" id="repo-link">Your GitHub repo (add link)</a></p>
+        <p class="muted">If you'd like, I can prepare a ready-to-upload package and show you how to enable GitHub Pages.</p>
+      </section>
+
+      <footer class="footer">
+        <small class="muted">TFCGT Bridge — Roadmap & project hub • Generated for your mod project</small>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Back to top -->
+  <button id="backToTop" aria-label="Back to top">↑ Top</button>
+
+  <!-- Link to external script -->
+  <script src="assets/script.js"></script>
+</body>
+</html>
