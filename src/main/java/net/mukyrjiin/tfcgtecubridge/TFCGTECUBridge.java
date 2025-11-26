@@ -1,49 +1,56 @@
 package net.mukyrjiin.tfcgtecubridge;
 
-import com.mojang.logging.LogUtils;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.slf4j.Logger;
+import net.mukyrjiin.tfcgtecubridge.compat.gt.GtOreMapper;
+import net.mukyrjiin.tfcgtecubridge.compat.tfc.TfcOreMapper;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-// The value here should match an entry in the META-INF/mods.toml file
-@Mod(TFCGTECUBridge.MOD_ID)
-public class TFCGTECUBridge
-{
-    // Define mod id in a common place for everything to reference
-    public static final String MOD_ID = "tfcgtecubridge";
-    // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+/**
+ * Main mod entry point for the TFC ↔ GTCEu Bridge.
+ *
+ * Phase 1:
+ *  - Mod loads
+ *  - Prints current ore mappings
+ *  - Verifies everything is wired correctly
+ */
+@Mod(TFCGTECUBridge.MODID)
+public class TFCGTECUBridge {
 
-    public TFCGTECUBridge(FMLJavaModLoadingContext context) {
+    public static final String MODID = "tfcgtceubridge";
+
+    public static final Logger LOGGER = LogManager.getLogger();
+
+    public TFCGTECUBridge() {
+        // Register lifecycle event listeners
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
+
+        LOGGER.info("[TFC-GTCEu Bridge] Mod initialized (Phase 1).");
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+        LOGGER.info("[TFC-GTCEu Bridge] Running common setup...");
+
+        // Print ore mappings for Phase 1 debug
+        printMappings();
     }
 
-    // Add the example block item to the building blocks tab
-    private void addCreative(BuildCreativeModeTabContentsEvent event) {
-    }
+    private void printMappings() {
+        LOGGER.info("========== TFC ↔ GTCEu Phase 1 Ore Mappings ==========");
 
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {
-    }
+        LOGGER.info("GTCEu Ore Map:");
+        GtOreMapper.getAll().forEach((k, v) ->
+                LOGGER.info("  GT -> {} = {}", k, v)
+        );
 
-    // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
-    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents
-    {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-        }
+        LOGGER.info("TFC Ore Map:");
+        TfcOreMapper.getAll().forEach((k, v) ->
+                LOGGER.info("  TFC -> {} = {}", k, v)
+        );
+
+        LOGGER.info("======================================================");
     }
 }
+
