@@ -1,42 +1,48 @@
 package net.mukyrjiin.tfcgtecubridge.compat.tfc;
 
+import net.mukyrjiin.tfcgtecubridge.TFCGTECUBridge;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Maps TerraFirmaCraft ore names to canonical TFC ore IDs.
- * This is Phase 1 only: no TFC API calls yet.
- */
+
 public class TfcOreMapper {
 
-    private static final Map<String, String> TFC_ORE_MAP = new HashMap<>();
+    /**
+     * Maps TFC ore identifiers → GTCEu Material names.
+     * Example:
+     * "tfc:cassiterite" → "tin"
+     */
+    public static final Map<String, String> TFC_TO_GT = new HashMap<>();
 
-    static {
-        // ========================
-        // Example mappings (Phase 1)
-        // Match these to actual TFC ore names
-        // ========================
+    public static void registerAllMappings() {
+        TFCGTECUBridge.LOGGER.info("[Bridge] Registering TFC → GTCEu ore mappings...");
 
-        TFC_ORE_MAP.put("cassiterite", "cassiterite");
-        TFC_ORE_MAP.put("hematite", "hematite");
-        TFC_ORE_MAP.put("magnetite", "magnetite");
-        TFC_ORE_MAP.put("galena", "galena");
-        TFC_ORE_MAP.put("chalcopyrite", "chalcopyrite");
-        TFC_ORE_MAP.put("bismuthinite", "bismuthinite");
+        // -------------------------
+        // PHASE 1: Primitive Base Mappings
+        // -------------------------
 
-        // Add more as needed
+        // Example tier-0 metals
+        TFC_TO_GT.put("tfc:cassiterite", "tin");
+        TFC_TO_GT.put("tfc:hematite", "iron");
+        TFC_TO_GT.put("tfc:malachite", "copper");
+        TFC_TO_GT.put("tfc:galena", "lead");
+
+        // Example alloy parents
+        TFC_TO_GT.put("tfc:sphalerite", "zinc");
+        TFC_TO_GT.put("tfc:bauxite", "aluminium");
+
+        // -------------------------
+        // TODO: PHASE 2+
+        // - Add GT ore variants → TFC veins
+        // -------------------------
+
+        TFCGTECUBridge.LOGGER.info("[Bridge] TFC → GTCEu mapping complete. {} entries.", TFC_TO_GT.size());
     }
 
     /**
-     * Returns a normalized TFC ore ID or null if unknown.
+     * Public resolver method
      */
-    public static String getTfcId(String oreName) {
-        if (oreName == null) return null;
-        return TFC_ORE_MAP.get(oreName.toLowerCase());
-    }
-
-    /** Returns the whole mapping (Phase 1 debugging). */
-    public static Map<String, String> getAll() {
-        return TFC_ORE_MAP;
+    public static String getGTMaterialName(String tfcOreId) {
+        return TFC_TO_GT.get(tfcOreId);
     }
 }

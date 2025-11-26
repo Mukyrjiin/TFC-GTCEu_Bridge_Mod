@@ -1,56 +1,41 @@
 package net.mukyrjiin.tfcgtecubridge;
 
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.mukyrjiin.tfcgtecubridge.compat.gt.GtOreMapper;
-import net.mukyrjiin.tfcgtecubridge.compat.tfc.TfcOreMapper;
+import net.mukyrjiin.tfcgtecubridge.compat.TFCCompatModule;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-/**
- * Main mod entry point for the TFC ↔ GTCEu Bridge.
- *
- * Phase 1:
- *  - Mod loads
- *  - Prints current ore mappings
- *  - Verifies everything is wired correctly
- */
 @Mod(TFCGTECUBridge.MODID)
 public class TFCGTECUBridge {
 
-    public static final String MODID = "tfcgtceubridge";
-
-    public static final Logger LOGGER = LogManager.getLogger();
+    public static final String MODID = "tfcgtecubridge";
+    public static final Logger LOGGER = LogManager.getLogger(MODID);
 
     public TFCGTECUBridge() {
-        // Register lifecycle event listeners
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
+        // Register mod event bus
+        IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        LOGGER.info("[TFC-GTCEu Bridge] Mod initialized (Phase 1).");
+        // Register Forge event bus
+        MinecraftForge.EVENT_BUS.addListener(this::onCommonSetup);
+
+        LOGGER.info("[TFC ↔ GTCEu Bridge] Mod constructor initialized.");
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event) {
-        LOGGER.info("[TFC-GTCEu Bridge] Running common setup...");
-
-        // Print ore mappings for Phase 1 debug
-        printMappings();
-    }
-
-    private void printMappings() {
-        LOGGER.info("========== TFC ↔ GTCEu Phase 1 Ore Mappings ==========");
-
-        LOGGER.info("GTCEu Ore Map:");
-        GtOreMapper.getAll().forEach((k, v) ->
-                LOGGER.info("  GT -> {} = {}", k, v)
-        );
-
-        LOGGER.info("TFC Ore Map:");
-        TfcOreMapper.getAll().forEach((k, v) ->
-                LOGGER.info("  TFC -> {} = {}", k, v)
-        );
-
-        LOGGER.info("======================================================");
+    /**
+     * Fires during Forge COMMON setup stage.
+     * Good for cross-mod compatibility and registry preparation.
+     */
+    private void onCommonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            LOGGER.info("[TFC ↔ GTCEu Bridge] Running compat setup...");
+            TFCCompatModule.init();
+            LOGGER.info("[TFC ↔ GTCEu Bridge] Setup complete.");
+        });
     }
 }
+
 
